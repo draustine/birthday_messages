@@ -99,7 +99,7 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> fetchCelebrantsList() async {
     if(isThereInternetAccess){
-      showToast(msg: 'Internet access is available', duration: 3);
+      await commonShowToast(msg: 'Internet access is available', duration: 3, context: context);
       final response = await http.get(Uri.parse(listUrl));
       if (response.statusCode == 200) {
         setState(() {
@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> {
         throw Exception('Failed to load JSON data');
       }
     } else {
-      showToast(msg: 'No Internet access!!!', duration: 3);
+      await commonShowToast(msg: 'No Internet access!!!', duration: 3, context: context);
       try{
         birthDaysJson = await loadJsonFromSharedPreferences(keyCelebrantsList);
       } catch (e){
@@ -207,7 +207,7 @@ class _MyAppState extends State<MyApp> {
     selectedSim = smsSlot;
     if (smsSlot != 0) {
       prefs.setInt(vDefaultSim, selectedSim);
-      showToast(msg: 'Current sms slot is Sim $smsSlot', duration: 4);
+      await commonShowToast(msg: 'Current sms slot is Sim $smsSlot', duration: 4, context: context);
     }
     return smsSlot;
   }

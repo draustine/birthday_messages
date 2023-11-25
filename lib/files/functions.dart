@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -489,4 +490,25 @@ void printList(List<String> list){
     log(item);
   }
 
+}
+
+
+Future<void> commonShowToast({required String msg, required int duration, required context}) async {
+  Future.delayed(Duration.zero, () {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text(msg),
+        duration: Duration(seconds: duration),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100),
+        ),
+        behavior: SnackBarBehavior.floating,
+        action: SnackBarAction(
+          label: 'OK',
+          onPressed: scaffold.hideCurrentSnackBar,
+        ),
+      ),
+    );
+  });
 }
