@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "170878072283",
+    "project_id": "messaging-68f27",
+    "storage_bucket": "messaging-68f27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170878072283:android:d82a81e30070d884a5a3fe",
+        "android_client_info": {
+          "package_name": "ng.com.stineze.birthday_messages"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1pJxjv0SlkWi2DTWSzSnmAwAVIee2hHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

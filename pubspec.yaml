@@ -41,6 +41,10 @@ dependencies:
   permission_handler: ^11.0.1
   connectivity_plus: ^5.0.1
   internet_connection_checker: ^1.0.0+1
+  firebase_core: ^2.24.2
+  firebase_storage: ^11.6.0
+  firebase_auth: ^4.16.0
+  firebase_app_check: ^0.2.1+8
 
 
 dev_dependencies:
