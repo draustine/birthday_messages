@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
 
+import 'package:birthday_messages/files/downloaders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -90,35 +91,26 @@ Future<void> checkTextData(String fileUrl, String dataName, String fileName) asy
 }
 
 
-Future<void> downloadTextFile(String fileUrl, String dataName, String fileName) async {
+Future<void> downloadTextFile(String fileName, String dataName, String memoryName) async {
   // Replace 'URL_TO_YOUR_TEXT_FILE' with the actual URL of the text file
-  var url = Uri.parse(fileUrl);
-
-  try {
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      // Fetching text from the file
-      String downloadedText = response.body;
-      prefs.setString(fileName, downloadedText);
-      // Save the downloaded text to shared preferences
-      switch (dataName){
-        case "messageTemplate":
-          messageTemplate = downloadedText;
-          break;
-        case "belatedMessageTemplate":
-          belatedMessageTemplate = downloadedText;
-          break;
-        case "providers":
-          providers = downloadedText;
-          break;
-      }
-
-    } else {
-      // Handle any error when fetching the file
+  try{
+    String downloadedText = await downloadAndReadTextFile(fileName);
+    prefs.setString(memoryName, downloadedText);
+    switch (dataName){
+      case "messageTemplate":
+        messageTemplate = downloadedText;
+        break;
+      case "belatedMessageTemplate":
+        belatedMessageTemplate = downloadedText;
+        break;
+      case "providers":
+        providers = downloadedText;
+        break;
     }
-  } catch (e) {
-    // Handle any network or unexpected errors
+  } catch (e){
+    throw Exception("Failed to download Text");
   }
+
 }
 
 

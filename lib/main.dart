@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:birthday_messages/files/downloaders.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -108,20 +109,19 @@ class _MyAppState extends State<MyApp> {
     //await Future.delayed(const Duration(seconds: 1));
   }
 
+
   Future<void> fetchCelebrantsList() async {
     if(isThereInternetAccess){
       await commonShowToast(msg: 'Internet access is available', duration: 3, context: context);
-      final response = await http.get(Uri.parse(listUrl));
-      if (response.statusCode == 200) {
+      try{
+        Map<String, dynamic> celebsJson = await downloadJsonFileToMapDynamic(clientsListFileName);
         setState(() {
-          birthDaysJson = json.decode(response.body);
+          birthDaysJson = celebsJson;
         });
-        String jsonString = jsonEncode(birthDaysJson);
-        await writeToFile(jsonString, downloadedJsonFile);
-        await saveLink(keyCelebrantsList, jsonString);
-      } else {
+      } catch (e) {
         throw Exception('Failed to load JSON data');
       }
+
     } else {
       await commonShowToast(msg: 'No Internet access!!!', duration: 3, context: context);
       try{
@@ -134,10 +134,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> downloadTemplates() async {
-    await checkTextData(messageUrl, "messageTemplate", messageFile);
+    await checkTextData(messageTemplateFilename, "messageTemplate", messageFile);
     await checkTextData(
-        belatedMessageUrl, "belatedMessageTemplate", belatedMessageFile);
-    await checkTextData(providersUrl, "providers", providersFile);
+        belatedMessageTemplateFileName, "belatedMessageTemplate", belatedMessageFile);
+    await checkTextData(providersFileName, "providers", providersFile);
   }
 
   Future<void> processProvidersInfo() async {

@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -42,7 +43,16 @@ late int phoneDefaultSim;
 String listUrl = 'https://www.dropbox.com/scl/fi/wh4xye4sqg0w2v4pz06lb/Upcoming-Birthdays.json?rlkey=b8g2uix8d451na1za46kg16mf&dl=1';
 String messageUrl = 'https://www.dropbox.com/scl/fi/xeo8aprr2my081qayujvq/Message-Template-flutter.txt?rlkey=r1wfkl8oobkorbxpv9zek5qxk&dl=1';
 String belatedMessageUrl = 'https://www.dropbox.com/scl/fi/xtp9aokmpkn46y1m55yif/Belated-Message-Template-flutter.txt?rlkey=j4juwmxccpdsvbtqmgx9hmthc&dl=1';
-String providersUrl = 'https://www.dropbox.com/s/yzxzzicw1eox5op/Newtork%20Providers.txt?dl=1';
+String providersUrl = 'https://www.dropbox.com/s/yzxzzicw1eox5op/Network%20Providers.txt?dl=1';
+
+String providersFileName = "Network Providers.txt";
+String messageTemplateFilename = "Message Template.txt";
+String belatedMessageTemplateFileName = "Belated Message Template.txt";
+String clientsListFileName = "Upcoming Birthdays.json";
+const String myBucket = "gs://messaging-68f27.appspot.com";
+final storageRef = FirebaseStorage.instanceFor(bucket: myBucket).ref();
+
+
 
 String vListUrl = 'listUrl';
 String vMessageUrl = 'messageUrl';
