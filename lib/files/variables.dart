@@ -22,6 +22,7 @@ String dateOfLastMessages = '';
 String sentDatesFileName = "DatesOfMessagesSent";
 List<String> sentDates = [];
 
+List<String> bookmarks = [];
 
 late int simCount;
 late int defaultSim;
