@@ -204,7 +204,8 @@ void organiseMessages(){
   for (final key in birthDaysJson.keys){
     Map<String, dynamic> item = birthDaysJson[key];
     anniversary = item["Anniversary"];
-    if (anniversary == date){
+    phone = item["Phone Number"];
+    if (anniversary == date && phone != ''){
       thisMessage = [];
       addedCost = 0;
       counter ++;
@@ -212,7 +213,7 @@ void organiseMessages(){
       title = item["Title"];
       name = item["Name"];
       dateOfBirth = item["Date of Birth"];
-      phone = item["Phone Number"];
+
       age = calculateAge(DateTime.parse(dateOfBirth!), DateTime.parse(date));
       if (age >= 18 && title == 'MASTER') {
         title = 'MR';
@@ -224,6 +225,7 @@ void organiseMessages(){
       thisMessage = [phone!, message, fullName, customerId];
       double cost;
       int additionalSms;
+     // print(phone);
       if(phone.substring(0, 4) == '+234'){
         localCounter ++;
         cost = localSmsUnitCost;
