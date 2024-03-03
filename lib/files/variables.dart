@@ -94,7 +94,7 @@ String vIntUnitCost = 'vIntUnitCost';
 late double totalLocalCost;
 late double totalIntCost;
 int firstPart = 160;
-int otherParts = 140;
+int otherParts = 146;
 String onCode = '';
 String offCode = '';
 String shortCode = '';
